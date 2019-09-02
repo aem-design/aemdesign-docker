@@ -7,7 +7,7 @@
     <!-- ====================================================================== -->
 
     <groupId>design.aem</groupId>
-    <version>1.0.131</version>
+    <version>.</version>
     <artifactId>aemdesign-docker</artifactId>
     <packaging>pom</packaging>
     <name>AEM Design - Operations - Docker</name>
