@@ -30,6 +30,7 @@ Confirm the container is running with `docker ps`
 | centos-java-buildpack     |                   | [![build_status](https://travis-ci.org/aem-design/centos-java-buildpack.svg?branch=master)](https://travis-ci.org/aem-design/centos-java-buildpack)  |
 | centos-tini               | oracle-jdk dispatcher | [![build_status](https://travis-ci.org/aem-design/centos-tini.svg?branch=master)](https://travis-ci.org/aem-design/centos-tini)  |
 | dispatcher                |                   | [![build_status](https://travis-ci.org/aem-design/dispatcher.svg?branch=master)](https://travis-ci.org/aem-design/dispatcher)  |
+| dockerhub-description     |                   | [![build_status](https://travis-ci.org/aem-design/dockerhub-description.svg?branch=master)](https://travis-ci.org/aem-design/dockerhub-description)  |
 | java-ffmpeg               | aem-base          | [![build_status](https://travis-ci.org/aem-design/java-ffmpeg.svg?branch=master)](https://travis-ci.org/aem-design/java-ffmpeg)  |
 | jenkins                   |                   | [![build_status](https://travis-ci.org/aem-design/jenkins.svg?branch=master)](https://travis-ci.org/aem-design/jenkins)  |
 | jenkins-base              | jenkins           | [![build_status](https://travis-ci.org/aem-design/jenkins-base.svg?branch=master)](https://travis-ci.org/aem-design/jenkins-base)  |
