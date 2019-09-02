@@ -1,0 +1,33 @@
+[submodule "aem"]
+	path = aem
+	url = git@github.com:aem-design/aem.git
+[submodule "aem-base"]
+	path = aem-base
+	url = git@github.com:aem-design/aem-base.git
+[submodule "ansible-playbook"]
+	path = ansible-playbook
+	url = git@github.com:aem-design/ansible-playbook.git
+[submodule "centos-java-buildpack"]
+	path = centos-java-buildpack
+	url = git@github.com:aem-design/centos-java-buildpack.git
+[submodule "centos-tini"]
+	path = centos-tini
+	url = git@github.com:aem-design/centos-tini.git
+[submodule "dispatcher"]
+	path = dispatcher
+	url = git@github.com:aem-design/dispatcher.git
+[submodule "java-ffmpeg"]
+	path = java-ffmpeg
+	url = git@github.com:aem-design/java-ffmpeg.git
+[submodule "jenkins"]
+	path = jenkins
+	url = git@github.com:aem-design/jenkins.git
+[submodule "jenkins-base"]
+	path = jenkins-base
+	url = git@github.com:aem-design/jenkins-base.git
+[submodule "nexus"]
+	path = nexus
+	url = git@github.com:aem-design/nexus.git
+[submodule "oracle-jdk"]
+	path = oracle-jdk
+	url = git@github.com:aem-design/oracle-jdk.git
