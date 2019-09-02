@@ -31,6 +31,3 @@
 [submodule "oracle-jdk"]
 	path = oracle-jdk
 	url = git@github.com:aem-design/oracle-jdk.git
-[submodule "dockerhub-description"]
-	path = dockerhub-description
-	url = git@github.com:aem-design/dockerhub-description.git
