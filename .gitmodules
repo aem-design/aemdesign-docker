@@ -34,3 +34,6 @@
 [submodule "dockerhub-description"]
 	path = dockerhub-description
 	url = git@github.com:aem-design/dockerhub-description.git
+[submodule "toughday"]
+	path = toughday
+	url = git@github.com:aem-design/toughday.git
