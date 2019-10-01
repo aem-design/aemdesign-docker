@@ -37,3 +37,6 @@
 [submodule "toughday"]
 	path = toughday
 	url = git@github.com:aem-design/toughday.git
+[submodule "travis-build-trigger"]
+	path = travis-build-trigger
+	url = git@github.com:aem-design/travis-build-trigger.git
