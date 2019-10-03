@@ -1,0 +1,1 @@
+These scripts are used in travis pipelines to keep pipelines clean.
