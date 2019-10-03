@@ -36,7 +36,7 @@
 	url = git@github.com:aem-design/dockerhub-description.git
 [submodule "toughday"]
 	path = toughday
-	url = git@github.com:aem-design/toughday.git
+	url = git@github.com:aem-design/docker-toughday.git
 [submodule "travis-build-trigger"]
 	path = travis-build-trigger
 	url = git@github.com:aem-design/travis-build-trigger.git
