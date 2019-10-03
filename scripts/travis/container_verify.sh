@@ -15,7 +15,7 @@ DIR=$(mktemp -d)
 echo ${TEST_COMMAND}>"${DIR}/verify.bash"
 chmod +x "${DIR}/verify.bash"
 echo "TEST:docker run -v ${DIR}:/verify ${IMAGE}:${IMAGE_VERSION} bash -c \"./verify/verify.bash>/verify/verify.output\""
-docker run -v ${DIR}:/verify ${IMAGE}:${IMAGE_VERSION} bash -c "./verify/verify.bash>/verify/verify.output"
+docker run -v ${DIR}:/verify:rw ${IMAGE}:${IMAGE_VERSION} bash -c "./verify/verify.bash>/verify/verify.output"
 CONTAINER_OUTPUT=$(cat "${DIR}/verify.output")
 echo "CONTAINER_OUTPUT=${CONTAINER_OUTPUT}"
 
