@@ -16,7 +16,7 @@ DIR=$(mktemp -d)
 echo ${TEST_COMMAND}>"${DIR}/verify.bash"
 chmod +x "${DIR}/verify.bash"
 echo "TEST:docker run -v ${DIR}:/verify ${IMAGE}:${IMAGE_VERSION} bash -c \"./verify/verify.bash\""
-export CONTAINER_OUTPUT=$(docker run -v ${DIR}:/verify ${IMAGE}:${IMAGE_VERSION} bash -c "chmod x /verify/verify.bash; ./verify/verify.bash")
+export CONTAINER_OUTPUT=$(docker run -v ${DIR}:/verify ${IMAGE}:${IMAGE_VERSION} bash -c "chmod +x /verify/verify.bash; ./verify/verify.bash")
 echo "CONTAINER_OUTPUT=${CONTAINER_OUTPUT}"
 
 if [[ ! ${CONTAINER_OUTPUT} =~ ${TEST_COMMAND_VERIFY} ]]; then
