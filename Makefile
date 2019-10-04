@@ -7,17 +7,17 @@ port=4502
 .PHONY: build run
 
 build:
-    cd centos-tini && \
+    cd docker-centos-tini && \
     docker build -t aemdesign/centos-tini:latest. && \
-    cd ../oracle-jdk && \
+    cd ../docker-oracle-jdk && \
     docker build -t aemdesign/oracle-jdk:latest . && \
-    cd ../java-ffmpeg && \
+    cd ../docker-java-ffmpeg && \
     docker build -t aemdesign/java-ffmpeg:latest . && \
-    cd ../aem-base && \
+    cd ../docker-aem-base && \
     docker build -t aemdesign/aem-base:latest . && \
-    cd ../aem && \
+    cd ../docker-aem && \
     docker build -t aemdesign/aem:latest . && \
-    cd ../dispatcher && \
+    cd ../docker-dispatcher && \
     docker build -t aemdesign/dispatcher:latest .
 
 run:

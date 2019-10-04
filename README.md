@@ -24,15 +24,15 @@ Confirm the container is running with `docker ps`
 
 | Image                     | Pipeline Trigger  | Pipeline Status         |
 |---------------------------|-------------------|-------------------------|
-| aem                       |                   | [![build_status](https://travis-ci.org/aem-design/aem.svg?branch=master)](https://travis-ci.org/aem-design/aem) |
-| aem-base                  | aem               | [![build_status](https://travis-ci.org/aem-design/aem-base.svg?branch=master)](https://travis-ci.org/aem-design/aem-base)  |
-| ansible-playbook          |                   | [![build_status](https://travis-ci.org/aem-design/ansible-playbook.svg?branch=master)](https://travis-ci.org/aem-design/ansible-playbook)  |
-| centos-java-buildpack     |                   | [![build_status](https://travis-ci.org/aem-design/centos-java-buildpack.svg?branch=master)](https://travis-ci.org/aem-design/centos-java-buildpack)  |
-| centos-tini               | oracle-jdk dispatcher | [![build_status](https://travis-ci.org/aem-design/centos-tini.svg?branch=master)](https://travis-ci.org/aem-design/centos-tini)  |
-| dispatcher                |                   | [![build_status](https://travis-ci.org/aem-design/dispatcher.svg?branch=master)](https://travis-ci.org/aem-design/dispatcher)  |
-| dockerhub-description     |                   | [![build_status](https://travis-ci.org/aem-design/dockerhub-description.svg?branch=master)](https://travis-ci.org/aem-design/dockerhub-description)  |
-| java-ffmpeg               | aem-base          | [![build_status](https://travis-ci.org/aem-design/java-ffmpeg.svg?branch=master)](https://travis-ci.org/aem-design/java-ffmpeg)  |
-| jenkins                   |                   | [![build_status](https://travis-ci.org/aem-design/jenkins.svg?branch=master)](https://travis-ci.org/aem-design/jenkins)  |
-| jenkins-base              | jenkins           | [![build_status](https://travis-ci.org/aem-design/jenkins-base.svg?branch=master)](https://travis-ci.org/aem-design/jenkins-base)  |
-| nexus                     |                   | [![build_status](https://travis-ci.org/aem-design/nexus.svg?branch=master)](https://travis-ci.org/aem-design/nexus)  |
-| oracle-jdk                | java-ffmpeg jenkins-base nexus | [![build_status](https://travis-ci.org/aem-design/oracle-jdk.svg?branch=master)](https://travis-ci.org/aem-design/oracle-jdk)  |
+| aem                       |                   | [![build_status](https://travis-ci.org/aem-design/docker-aem.svg?branch=master)](https://travis-ci.org/aem-design/docker-aem) |
+| aem-base                  | aem               | [![build_status](https://travis-ci.org/aem-design/docker-aem-base.svg?branch=master)](https://travis-ci.org/aem-design/docker-aem-base)  |
+| ansible-playbook          |                   | [![build_status](https://travis-ci.org/aem-design/docker-ansible-playbook.svg?branch=master)](https://travis-ci.org/aem-design/docker-ansible-playbook)  |
+| centos-java-buildpack     |                   | [![build_status](https://travis-ci.org/aem-design/docker-centos-java-buildpack.svg?branch=master)](https://travis-ci.org/aem-design/docker-centos-java-buildpack)  |
+| centos-tini               | oracle-jdk dispatcher | [![build_status](https://travis-ci.org/aem-design/docker-centos-tini.svg?branch=master)](https://travis-ci.org/aem-design/docker-centos-tini)  |
+| dispatcher                |                   | [![build_status](https://travis-ci.org/aem-design/docker-dispatcher.svg?branch=master)](https://travis-ci.org/aem-design/docker-dispatcher)  |
+| dockerhub-description     |                   | [![build_status](https://travis-ci.org/aem-design/docker-dockerhub-description.svg?branch=master)](https://travis-ci.org/aem-design/docker-dockerhub-description)  |
+| java-ffmpeg               | aem-base          | [![build_status](https://travis-ci.org/aem-design/docker-java-ffmpeg.svg?branch=master)](https://travis-ci.org/aem-design/docker-java-ffmpeg)  |
+| jenkins                   |                   | [![build_status](https://travis-ci.org/aem-design/docker-jenkins.svg?branch=master)](https://travis-ci.org/aem-design/docker-jenkins)  |
+| jenkins-base              | jenkins           | [![build_status](https://travis-ci.org/aem-design/docker-jenkins-base.svg?branch=master)](https://travis-ci.org/aem-design/docker-jenkins-base)  |
+| nexus                     |                   | [![build_status](https://travis-ci.org/aem-design/docker-nexus.svg?branch=master)](https://travis-ci.org/aem-design/docker-nexus)  |
+| oracle-jdk                | java-ffmpeg jenkins-base nexus | [![build_status](https://travis-ci.org/aem-design/docker-oracle-jdk.svg?branch=master)](https://travis-ci.org/aem-design/docker-oracle-jdk)  |
