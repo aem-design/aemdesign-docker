@@ -2,6 +2,10 @@ language: java
 
 if: tag is blank
 
+git:
+  depth: 1
+  submodules: false
+  
 services:
   - 'docker'
 
