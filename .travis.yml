@@ -7,7 +7,7 @@ services:
 
 ## Get the project version
 before_deploy:
-  - if [[ $TRAVIS_BRANCH == "master" ]]; then git tag $TRAVIS_TAG; fi
+  - if [[ $TRAVIS_BRANCH == "master" ]] && [[ $(git tag -l $TRAVIS_TAG) == "" ]]; then git tag $TRAVIS_TAG; fi
 
 ## Create release in GitHub
 deploy:
