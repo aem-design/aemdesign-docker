@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Gets current version from Git log, need to have at least one tag for this to work
+
 echo ">>> GET CONFIG FROM GIT <<<"
 export CURRENT_VERSION=$(git describe --tag --always --long | sed -e 's/\(.*\)-\(.*\)-.*/\1.\2/')
 echo "CURRENT_VERSION:${CURRENT_VERSION}"

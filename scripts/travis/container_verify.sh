@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# requires that get_config.sh has been executed.
+# requires that get_config.sh has been executed, will
 
 # to test this script run
 # IMAGE="aemdesign/oracle-jdk" IMAGE_VERSION="jdk8" TEST_COMMAND_VERIFY="1.8" TEST_COMMAND="java -version 2>&1 | grep 'java version' | sed -e 's/.*java version \"\(.*\)\".*/\1/'"  ./container_verify.sh
@@ -10,6 +10,7 @@ if [[ -z "${IMAGE}" ]] || [[ -z "${IMAGE_VERSION}" ]] || [[ -z "${TEST_COMMAND}"
     travis_terminate 1
 fi
 
+#create a verify script and copy it into the container
 echo ">>> VERIFY BUILD CONTAINER <<<"
 DIR=$(mktemp -d)
 echo ${TEST_COMMAND}>"${DIR}/verify.bash"

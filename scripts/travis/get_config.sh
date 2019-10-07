@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+#gets config from Dockerfile
+
 echo ">>> GET CONFIG FROM DOCKERFILE <<<"
 export IMAGE_NAME=$(grep imagename= Dockerfile | sed -e 's/.*imagename="\(.*\)".*/\1/')
 export TEST_COMMAND=$(grep test.command= Dockerfile | sed -e 's/.*test.command="\(.*\)".*/\1/')
