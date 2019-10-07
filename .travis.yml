@@ -1,0 +1,23 @@
+language: java
+
+if: tag is blank
+
+services:
+  - 'docker'
+
+## Get the project version
+before_deploy:
+  - if [[ $TRAVIS_BRANCH == "master" ]]; then git tag $TRAVIS_TAG; fi
+
+## Create release in GitHub
+deploy:
+  provider: releases
+  file:
+    - scripts/travis/*.sh
+  tag_name: $TRAVIS_TAG
+  name: $TRAVIS_TAG
+  target_commitish: $TRAVIS_COMMIT
+  api_key: $GITHUB_TOKEN
+  skip_cleanup: true
+  on:
+    branch: master
