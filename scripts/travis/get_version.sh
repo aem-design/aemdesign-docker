@@ -38,3 +38,4 @@ if [[ ${SEMVER_MAJOR} == "" ]];then
 fi
 export TRAVIS_TAG=${SEMVER}
 echo "TRAVIS_TAG:${TRAVIS_TAG}"
+echo GIT_RELEASE_NOTES="$(git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"%h - %s (%an)")"
