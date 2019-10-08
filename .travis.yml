@@ -14,7 +14,6 @@ services:
 
 ## Get the project version
 before_deploy:
-  - set -v
   - ./scripts/travis/get_version.sh
   - if [[ $TRAVIS_BRANCH == "master" ]] && [[ $(git tag -l $TRAVIS_TAG) == "" ]]; then git tag $TRAVIS_TAG; fi
 
@@ -22,8 +21,6 @@ before_deploy:
 deploy:
   - provider: releases
     edge: true
-    tag_name: $TRAVIS_TAG
-    target_commitish: $TRAVIS_COMMIT
     api_key: $GITHUB_TOKEN
     skip_cleanup: true
     file_glob: true
