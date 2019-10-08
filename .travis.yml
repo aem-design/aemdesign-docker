@@ -14,6 +14,7 @@ services:
 
 ## Get the project version
 before_deploy:
+  - set -v
   - ./scripts/travis/get_version.sh
   - if [[ $TRAVIS_BRANCH == "master" ]] && [[ $(git tag -l $TRAVIS_TAG) == "" ]]; then git tag $TRAVIS_TAG; fi
 
