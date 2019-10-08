@@ -11,6 +11,7 @@ services:
 
 ## Get the project version
 before_deploy:
+  - export echo TRAVIS_TAG=$(git describe --tag --always --long | sed -e 's/\(.*\)-\(.*\)-.*/\1.\2/')
   - echo $TRAVIS_TAG
   - if [[ $TRAVIS_BRANCH == "master" ]] && [[ $(git tag -l $TRAVIS_TAG) == "" ]]; then git tag $TRAVIS_TAG; fi
 
