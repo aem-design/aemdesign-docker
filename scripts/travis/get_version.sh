@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
 # Gets current version from Git log, need to have at least one tag for this to work
+# create a tag that matches https://semver.org/
 
 echo ">>> GET CONFIG FROM GIT <<<"
+echo GET FULL GIT HISTORY
+git fetch --unshallow --tags
 export CURRENT_VERSION=$(git describe --tag --always --long | sed -e 's/\(.*\)-\(.*\)-.*/\1.\2/')
 echo "CURRENT_VERSION:${CURRENT_VERSION}"
 declare -a CURRENT_VERSION_ARRAY="(${CURRENT_VERSION//./ })";
@@ -10,7 +13,13 @@ export SEMVER_MAJOR=${CURRENT_VERSION_ARRAY[0]};
 export SEMVER_MINOR=${CURRENT_VERSION_ARRAY[1]};
 export SEMVER_PATCH=${CURRENT_VERSION_ARRAY[2]};
 export SEMVER_BUILD=${CURRENT_VERSION_ARRAY[-1]}
-export SEMVER_BUILD=$(( ${SEMVER_PATCH} + ${SEMVER_BUILD} ))
+
+# if tag already has MAJOR.MINOR.PATCH add git log commit count to patch
+if [[ "${#CURRENT_VERSION_ARRAY[@]}" == "4" ]]; then
+    echo "ADD PATCH TO BUILD VERSION"
+    export SEMVER_BUILD=$(( ${SEMVER_PATCH} + ${SEMVER_BUILD} ))
+fi
+
 echo "SEMVER_MAJOR:${SEMVER_MAJOR}"
 echo "SEMVER_MINOR:${SEMVER_MINOR}"
 echo "SEMVER_BUILD:${SEMVER_BUILD}"
