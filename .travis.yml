@@ -21,6 +21,7 @@ before_deploy:
 deploy:
   - provider: releases
     api_key: $GITHUB_TOKEN
+    name: $TRAVIS_TAG
     skip_cleanup: true
     file_glob: true
     file: scripts/**/*
