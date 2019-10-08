@@ -15,7 +15,7 @@ echo ">>> VERIFY BUILD CONTAINER <<<"
 DIR=$(mktemp -d)
 echo "TEST_COMMAND:${TEST_COMMAND}"
 echo "TEST:docker run --env TEST_COMMAND ${IMAGE}:${IMAGE_VERSION} bash -c '\$(\${TEST_COMMAND})'"
-export CONTAINER_OUTPUT=$(docker run --env TEST_COMMAND ${IMAGE}:${IMAGE_VERSION} bash -c '$(${TEST_COMMAND})')
+export CONTAINER_OUTPUT=$(docker run --env TEST_COMMAND ${IMAGE}:${IMAGE_VERSION} bash -c "\$(\${TEST_COMMAND})")
 echo "CONTAINER_OUTPUT=${CONTAINER_OUTPUT}"
 
 if [[ ! ${CONTAINER_OUTPUT} =~ ${TEST_COMMAND_VERIFY} ]]; then
