@@ -19,12 +19,13 @@ before_deploy:
 
 ## Create release in GitHub
 deploy:
-  provider: releases
-  tag_name: $TRAVIS_TAG
-  target_commitish: $TRAVIS_COMMIT
-  api_key: $GITHUB_TOKEN
-  skip_cleanup: true
-  file_glob: true
-  file: scripts/**/*
-  on:
-    branch: master
+  - provider: releases
+    edge: true
+    tag_name: $TRAVIS_TAG
+    target_commitish: $TRAVIS_COMMIT
+    api_key: $GITHUB_TOKEN
+    skip_cleanup: true
+    file_glob: true
+    file: scripts/**/*
+    on:
+      branch: master
