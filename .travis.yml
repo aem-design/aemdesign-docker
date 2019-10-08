@@ -20,7 +20,6 @@ before_deploy:
 ## Create release in GitHub
 deploy:
   - provider: releases
-    edge: true
     tag_name: "$TRAVIS_TAG"
     name: "$TRAVIS_TAG"
     target_commitish: $TRAVIS_COMMIT
