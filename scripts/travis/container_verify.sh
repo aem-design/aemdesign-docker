@@ -13,9 +13,11 @@ fi
 #create a verify script and copy it into the container
 echo ">>> VERIFY BUILD CONTAINER <<<"
 DIR=$(mktemp -d)
+echo "TEST_COMMAND:${TEST_COMMAND}"
 echo ${TEST_COMMAND}>"${DIR}/verify.bash"
-echo "TEST:docker run -v ${DIR}:/verify ${IMAGE}:${IMAGE_VERSION} bash -c \"chmod u+x /verify/verify.bash; ./verify/verify.bash\""
-export CONTAINER_OUTPUT=$(docker run -v ${DIR}:/verify ${IMAGE}:${IMAGE_VERSION} bash -c "cp /verify/verify.bash /; chmod u+x /verify.bash; ./verify.bash")
+cat ${DIR}/verify.bash
+echo "TEST:docker run -v ${DIR}:/verify ${IMAGE}:${IMAGE_VERSION} bash -c \"cp /verify/verify.bash /; ls /; chmod u+x /verify.bash; ./verify.bash\""
+export CONTAINER_OUTPUT=$(docker run -v ${DIR}:/verify ${IMAGE}:${IMAGE_VERSION} bash -c "cp /verify/verify.bash /; ls /; chmod u+x /verify.bash; ./verify.bash")
 echo "CONTAINER_OUTPUT=${CONTAINER_OUTPUT}"
 
 if [[ ! ${CONTAINER_OUTPUT} =~ ${TEST_COMMAND_VERIFY} ]]; then
