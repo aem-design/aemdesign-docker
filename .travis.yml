@@ -23,7 +23,6 @@ deploy:
   file:
     - scripts/travis/*.sh
   tag_name: $TRAVIS_TAG
-  name: $TRAVIS_TAG
   target_commitish: $TRAVIS_COMMIT
   api_key: $GITHUB_TOKEN
   skip_cleanup: true
