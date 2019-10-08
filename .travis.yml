@@ -15,13 +15,12 @@ services:
 ## Get the project version
 before_deploy:
   - ./scripts/travis/get_version.sh
-  - if [[ $TRAVIS_BRANCH == "master" ]]; then git tag $TRAVIS_TAG; fi
+  - if [[ $TRAVIS_BRANCH == "master" ]]; then echo "TAG REPO:$TRAVIS_TAG"; git tag $TRAVIS_TAG; fi
 
 ## Create release in GitHub
 deploy:
   - provider: releases
     api_key: $GITHUB_TOKEN
-    name: $TRAVIS_TAG
     skip_cleanup: true
     file_glob: true
     file: scripts/**/*
