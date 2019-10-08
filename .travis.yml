@@ -25,4 +25,4 @@ deploy:
     file_glob: true
     file: scripts/**/*
     on:
-      branch: master
+      tags: true
