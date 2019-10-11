@@ -15,11 +15,10 @@ echo ">>> VERIFY BUILD CONTAINER <<<"
 DIR=$(mktemp -d)
 echo "TEST_COMMAND:${TEST_COMMAND}"
 echo "TEST:docker run --env TEST_COMMAND ${IMAGE}:${IMAGE_VERSION} bash -c '\$(\${TEST_COMMAND})'"
-export CONTAINER_OUTPUT=$(docker run --env TEST_COMMAND ${IMAGE}:${IMAGE_VERSION} bash -c "\$(\${TEST_COMMAND})")
+export CONTAINER_OUTPUT=$(docker run --env TEST_COMMAND ${IMAGE}:${IMAGE_VERSION} bash -c "\$(\${TEST_COMMAND})| grep -q -e ${TEST_COMMAND_VERIFY} && echo true || echo false")
 echo "CONTAINER_OUTPUT:${CONTAINER_OUTPUT}"
-echo TEST:$(echo "${CONTAINER_OUTPUT}" | grep -q -e "${TEST_COMMAND_VERIFY}" && echo true || echo false)
 
-if [[ "$(echo "${CONTAINER_OUTPUT}" | grep -q -e "${TEST_COMMAND_VERIFY}" && echo true || echo false)" == "false" ]]; then
+if [[ "${CONTAINER_OUTPUT}" == "false" ]]; then
     echo ">>> TEST FAILED <<<"
     echo "Expected: ${TEST_COMMAND_VERIFY}"
     echo "Got: ${CONTAINER_OUTPUT}"
