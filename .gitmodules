@@ -40,3 +40,6 @@
 [submodule "docker-travis-build-trigger"]
 	path = docker-travis-build-trigger
 	url = git@github.com:aem-design/docker-travis-build-trigger.git
+[submodule "docker-openjdk"]
+	path = docker-openjdk
+	url = git@github.com:aem-design/docker-openjdk.git
