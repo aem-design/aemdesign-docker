@@ -43,3 +43,6 @@
 [submodule "docker-openjdk"]
 	path = docker-openjdk
 	url = git@github.com:aem-design/docker-openjdk.git
+[submodule "docker-nginx"]
+	path = docker-nginx
+	url = git@github.com:aem-design/docker-nginx.git
