@@ -27,6 +27,6 @@ deploy:
     skip_cleanup: true
     file_glob: true
     body: $GIT_RELEASE_NOTES
-    file: scripts/**/*
+    file: scripts/**/*.sh
     on:
       branch: master
