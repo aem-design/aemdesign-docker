@@ -2,6 +2,10 @@
 
 #gets config from Dockerfile
 
+if [[ -z "${ORGANISATION_NAME}" ]]; then
+  echo "please set ORGANISATION_NAME variable"
+fi
+
 echo ">>> GET CONFIG FROM DOCKERFILE <<<"
 export IMAGE_NAME=$(grep imagename= Dockerfile | sed -e 's/.*imagename="\(.*\)".*/\1/')
 echo ::set-env name=IMAGE_NAME::${IMAGE_NAME}
