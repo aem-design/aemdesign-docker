@@ -1,6 +1,14 @@
 AEM Design - Docker Configuration
 =================================
 
+[![build_status](https://travis-ci.org/aem-design/aemdesign-docker.svg?branch=master)](https://travis-ci.org/aem-design/aemdesign-docker) 
+[![github license](https://img.shields.io/github/license/aem-design/aemdesign-docker)](https://github.com/aem-design/aemdesign-docker) 
+[![github issues](https://img.shields.io/github/issues/aem-design/aemdesign-docker)](https://github.com/aem-design/aemdesign-docker) 
+[![github last commit](https://img.shields.io/github/last-commit/aem-design/aemdesign-docker)](https://github.com/aem-design/aemdesign-docker) 
+[![github repo size](https://img.shields.io/github/repo-size/aem-design/aemdesign-docker)](https://github.com/aem-design/aemdesign-docker) 
+[![github release](https://img.shields.io/github/release/aem-design/aemdesign-docker)](https://github.com/aem-design/aemdesign-docker)
+
+
 This project contains all of the docker images used for AEM.Design.
 
 All images are published to hub.docker.com and are public.
