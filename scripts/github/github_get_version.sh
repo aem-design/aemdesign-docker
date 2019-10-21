@@ -42,7 +42,7 @@ echo ::set-env name=SEMVER::${SEMVER}
 echo "SEMVER:${SEMVER}"
 if [[ ${SEMVER_MAJOR} == "" ]];then
     echo PLEASE ADD TAG TO YOUR BRANCH
-    travis_terminate 1;
+    exit 1;
 fi
 export GITHUB_TAG=${SEMVER}
 echo ::set-env name=GITHUB_TAG::${GITHUB_TAG}
