@@ -46,5 +46,5 @@ Confirm the container is running with `docker ps`
 | nginx                |  | [![build_status](https://travis-ci.org/aem-design/docker-nginx.svg?branch=master)](https://travis-ci.org/aem-design/docker-nginx)  |
 | oracle-jdk                | java-ffmpeg jenkins-base nexus | [![build_status](https://travis-ci.org/aem-design/docker-oracle-jdk.svg?branch=master)](https://travis-ci.org/aem-design/docker-oracle-jdk)  |
 | openjdk                |  | [![build_status](https://travis-ci.org/aem-design/docker-openjdk.svg?branch=master)](https://travis-ci.org/aem-design/docker-openjdk)  |
-| toughday                |  | [![build_status](https://travis-ci.org/aem-design/docker-toughday.svg?branch=master)](https://travis-ci.org/aem-design/docker-toughday)  |
+| toughday                |  | [![build_status](https://github.com/aem-design/docker-toughday/workflows/ci/badge.svg)](https://github.com/aem-design/docker-toughday/actions?workflow=ci)  |
 | travis-build-trigger                |  | [![build_status](https://travis-ci.org/aem-design/docker-travis-build-trigger.svg?branch=master)](https://travis-ci.org/aem-design/docker-travis-build-trigger)  |
