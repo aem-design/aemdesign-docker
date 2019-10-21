@@ -7,7 +7,6 @@ echo ">>> GET CONFIG FROM GIT <<<"
 echo GET FULL GIT HISTORY
 git fetch --depth=10000 --tags
 export CURRENT_VERSION=$(git describe --tag --always --long | sed -e 's/\(.*\)-\(.*\)-.*/\1.\2/')
-echo ::set-env name=CURRENT_VERSION::${CURRENT_VERSION}
 
 echo "CURRENT_VERSION:${CURRENT_VERSION}"
 declare -a CURRENT_VERSION_ARRAY="(${CURRENT_VERSION//./ })";
@@ -57,3 +56,7 @@ echo "GITHUB_TAG:${GITHUB_TAG}"
 export GIT_RELEASE_NOTES="$(git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"%h - %s (%an)")"
 echo ::set-env name=GIT_RELEASE_NOTES::${GIT_RELEASE_NOTES}
 echo ::set-output name=GIT_RELEASE_NOTES::${GIT_RELEASE_NOTES}
+
+#set CURRENT_VERSION to semver
+echo ::set-env name=CURRENT_VERSION::${GITHUB_TAG}
+echo ::set-output name=CURRENT_VERSION::${GITHUB_TAG}
