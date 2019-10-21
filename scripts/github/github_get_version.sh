@@ -13,18 +13,23 @@ echo "CURRENT_VERSION:${CURRENT_VERSION}"
 declare -a CURRENT_VERSION_ARRAY="(${CURRENT_VERSION//./ })";
 export SEMVER_MAJOR=${CURRENT_VERSION_ARRAY[0]};
 echo ::set-env name=SEMVER_MAJOR::${SEMVER_MAJOR}
+echo ::set-output name=SEMVER_MAJOR::${SEMVER_MAJOR}
 export SEMVER_MINOR=${CURRENT_VERSION_ARRAY[1]};
 echo ::set-env name=SEMVER_MINOR::${SEMVER_MINOR}
+echo ::set-output name=SEMVER_MINOR::${SEMVER_MINOR}
 export SEMVER_PATCH=${CURRENT_VERSION_ARRAY[2]};
 echo ::set-env name=SEMVER_PATCH::${SEMVER_PATCH}
+echo ::set-output name=SEMVER_PATCH::${SEMVER_PATCH}
 export SEMVER_BUILD=${CURRENT_VERSION_ARRAY[-1]}
 echo ::set-env name=SEMVER_BUILD::${SEMVER_BUILD}
+echo ::set-output name=SEMVER_BUILD::${SEMVER_BUILD}
 
 # if tag already has MAJOR.MINOR.PATCH add git log commit count to patch
 if [[ "${#CURRENT_VERSION_ARRAY[@]}" == "4" ]]; then
     echo "ADD PATCH TO BUILD VERSION"
     export SEMVER_BUILD=$(( ${SEMVER_PATCH} + ${SEMVER_BUILD} ))
   echo ::set-env name=SEMVER_BUILD::${SEMVER_BUILD}
+  echo ::set-output name=SEMVER_BUILD::${SEMVER_BUILD}
 fi
 
 echo "SEMVER_MAJOR:${SEMVER_MAJOR}"
@@ -39,6 +44,7 @@ fi
 
 export SEMVER=${SEMVER_MAJOR}.${SEMVER_MINOR}.${SEMVER_BUILD}
 echo ::set-env name=SEMVER::${SEMVER}
+echo ::set-output name=SEMVER::${SEMVER}
 echo "SEMVER:${SEMVER}"
 if [[ ${SEMVER_MAJOR} == "" ]];then
     echo PLEASE ADD TAG TO YOUR BRANCH
@@ -46,6 +52,8 @@ if [[ ${SEMVER_MAJOR} == "" ]];then
 fi
 export GITHUB_TAG=${SEMVER}
 echo ::set-env name=GITHUB_TAG::${GITHUB_TAG}
+echo ::set-output name=GITHUB_TAG::${GITHUB_TAG}
 echo "GITHUB_TAG:${GITHUB_TAG}"
 export GIT_RELEASE_NOTES="$(git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"%h - %s (%an)")"
 echo ::set-env name=GIT_RELEASE_NOTES::${GIT_RELEASE_NOTES}
+echo ::set-output name=GIT_RELEASE_NOTES::${GIT_RELEASE_NOTES}
