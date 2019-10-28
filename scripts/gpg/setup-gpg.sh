@@ -35,6 +35,14 @@ if [[ -z "${GPG_PRESET_EXECUTABLE}" ]]; then
   export GPG_PRESET_EXECUTABLE="/usr/lib/gnupg/gpg-preset-passphrase"
 fi
 
+if [[ -z "${GPG_AGENT_EXECUTABLE}" ]]; then
+  export GPG_AGENT_EXECUTABLE="gpg-agent"
+fi
+
+if [[ -z "${GPG_AGENT_CONNECT_EXECUTABLE}" ]]; then
+  export GPG_AGENT_CONNECT_EXECUTABLE="gpg-connect-agent"
+fi
+
 ${GPG_EXECUTABLE} --version
 
 if [[ -f ${GPG_PRESET_EXECUTABLE} ]]; then
@@ -45,7 +53,7 @@ else
   exit 1
 fi
 
-git config --global gpg.program $(which gpg)
+git config --global gpg.program $(which ${GPG_EXECUTABLE})
 mkdir ~/.gnupg
 touch ~/.gnupg/gpg-agent.conf
 echo "default-cache-ttl 600" > ~/.gnupg/gpg-agent.conf
@@ -63,18 +71,18 @@ chmod 700 ~/.gnupg
 # Set permissions to read, write for only yourself, no others
 chmod 600 ~/.gnupg/*
 echo ">>> RESTART AGENT <<<"
-gpg-connect-agent reloadagent /bye
+${GPG_AGENT_CONNECT_EXECUTABLE} reloadagent /bye
 echo ">>> GET AGENT STATUS <<<"
-gpg-agent
+${GPG_AGENT_EXECUTABLE}
 echo ">>> IMPORT KEYS <<<"
 echo ${GPG_SECRET_KEYS} | base64 --decode | ${GPG_EXECUTABLE} --batch --import
 echo ${GPG_OWNERTRUST} | base64 --decode | ${GPG_EXECUTABLE} --import-ownertrust
 echo ">>> LIST KEYS <<<"
-gpg --list-keys
+${GPG_EXECUTABLE} --list-keys
 echo ">>> CHECK KEYGRIP <<<"
-gpg --with-keygrip -K ${GPG_PUBID}
+${GPG_EXECUTABLE} --with-keygrip -K ${GPG_PUBID}
 echo ">>> CACHE PASSPHRASE <<<"
 ${GPG_PRESET_EXECUTABLE} --preset --passphrase ${GPG_PASSPHRASE} ${GPG_PUBID_KEYGRIP}
 echo ">>> TEST GPG <<<"
-echo "test" | gpg --clearsign
+echo "test" | ${GPG_EXECUTABLE} --clearsign
 
