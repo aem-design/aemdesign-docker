@@ -62,6 +62,6 @@ echo ::set-env name=CURRENT_VERSION::${GITHUB_TAG}
 echo ::set-output name=CURRENT_VERSION::${GITHUB_TAG}
 
 #get current branch name
-export GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+export GIT_BRANCH=$(git branch --show-current)
 echo ::set-env name=GIT_BRANCH::${GIT_BRANCH}
 echo ::set-output name=GIT_BRANCH::${GIT_BRANCH}
