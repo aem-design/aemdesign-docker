@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# NOTIFY AND ABORT IF MANDATORY PARAMS ARE NOT SET
 if [[ -z "${GPG_SECRET_KEYS}" ]]; then
   echo "GPG_SECRET_KEYS is not set"
   exit 1
@@ -16,11 +17,32 @@ if [[ -z "${GPG_PASSPHRASE}" ]]; then
 fi
 
 if [[ -z "${GPG_PUBID}" ]]; then
-  export GPG_PUBID="50A036956AAC64C13EF47B10D1E96A30ECFC7DFF"
+  echo "GPG_PUBID is not set"
+  exit 1
 fi
 
 if [[ -z "${GPG_PUBID_KEYGRIP}" ]]; then
-  export GPG_PUBID_KEYGRIP="020E615868703482DC2CD110B98D2702B6ABF89C"
+  echo "GPG_PUBID_KEYGRIP is not set"
+  exit 1
+fi
+
+# SET DEFAULTS
+if [[ -z "${GPG_EXECUTABLE}" ]]; then
+  export GPG_EXECUTABLE="gpg"
+fi
+
+if [[ -z "${GPG_PRESET_EXECUTABLE}" ]]; then
+  export GPG_PRESET_EXECUTABLE="/usr/lib/gnupg/gpg-preset-passphrase"
+fi
+
+${GPG_EXECUTABLE} --version
+
+if [[ -f ${GPG_PRESET_EXECUTABLE} ]]; then
+  ${GPG_PRESET_EXECUTABLE} --version
+else
+  echo "can't find ${GPG_PRESET_EXECUTABLE}"
+  find / -name gpg-preset-passphrase
+  exit 1
 fi
 
 git config --global gpg.program $(which gpg)
@@ -45,14 +67,14 @@ gpg-connect-agent reloadagent /bye
 echo ">>> GET AGENT STATUS <<<"
 gpg-agent
 echo ">>> IMPORT KEYS <<<"
-echo ${GPG_SECRET_KEYS} | base64 --decode | gpg --batch --import
-echo ${GPG_OWNERTRUST} | base64 --decode | gpg --import-ownertrust
+echo ${GPG_SECRET_KEYS} | base64 --decode | ${GPG_EXECUTABLE} --batch --import
+echo ${GPG_OWNERTRUST} | base64 --decode | ${GPG_EXECUTABLE} --import-ownertrust
 echo ">>> LIST KEYS <<<"
 gpg --list-keys
 echo ">>> CHECK KEYGRIP <<<"
 gpg --with-keygrip -K ${GPG_PUBID}
 echo ">>> CACHE PASSPHRASE <<<"
-/usr/lib/gnupg/gpg-preset-passphrase --preset --passphrase ${GPG_PASSPHRASE} ${GPG_PUBID_KEYGRIP}
+${GPG_PRESET_EXECUTABLE} --preset --passphrase ${GPG_PASSPHRASE} ${GPG_PUBID_KEYGRIP}
 echo ">>> TEST GPG <<<"
 echo "test" | gpg --clearsign
 
