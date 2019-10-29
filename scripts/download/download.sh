@@ -33,7 +33,7 @@ function doDownload() {
 
       if [[ ! -f "${MODULE_SCRIPT}" ]]; then
           echo "module: error, could not find module script"
-          exit 0
+          return
       fi
 
       FILTER=$(echo $MODULE | sed -e 's/.*:\(.*\)/\1/')
@@ -44,7 +44,7 @@ function doDownload() {
       echo ${FILEURL_FILTER_URL}
       if [[ "${FILEURL_FILTER_URL}" == "" ]]; then
           echo "module: error, could not get url from module"
-          exit 0
+          return
       fi
       FILENAME=$(basename "${FILEURL_FILTER_URL}")
       FILEURL=${FILEURL_FILTER_URL}
@@ -86,7 +86,7 @@ function download() {
 
   if [[ $# -eq 0 ]]; then
       downloadHelp
-      exit 1
+      return
   fi
 
   local ACTIONS_COUNT=$#
