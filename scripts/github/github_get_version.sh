@@ -53,7 +53,7 @@ export GITHUB_TAG=${SEMVER}
 echo ::set-env name=GITHUB_TAG::${GITHUB_TAG}
 echo ::set-output name=GITHUB_TAG::${GITHUB_TAG}
 echo "GITHUB_TAG:${GITHUB_TAG}"
-export GIT_RELEASE_NOTES="$(git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"%h - %s (%an)<br>")"
+export GIT_RELEASE_NOTES="$(git log $(git describe --tags --abbrev=0 --always)..HEAD --pretty=format:"%h - %s (%an)<br>")"
 echo ::set-env name=GIT_RELEASE_NOTES::${GIT_RELEASE_NOTES}
 echo ::set-output name=GIT_RELEASE_NOTES::${GIT_RELEASE_NOTES}
 
