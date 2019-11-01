@@ -53,6 +53,9 @@ else
   exit 1
 fi
 
+export GPG_TTY=$(tty)
+echo ::set-env name=GPG_TTY::${GPG_TTY}
+
 git config --global gpg.program $(which ${GPG_EXECUTABLE})
 mkdir ~/.gnupg
 touch ~/.gnupg/gpg-agent.conf
