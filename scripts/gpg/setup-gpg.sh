@@ -84,5 +84,6 @@ ${GPG_EXECUTABLE} --with-keygrip -K ${GPG_PUBID}
 echo ">>> CACHE PASSPHRASE <<<"
 ${GPG_PRESET_EXECUTABLE} --preset --passphrase ${GPG_PASSPHRASE} ${GPG_PUBID_KEYGRIP}
 echo ">>> TEST GPG <<<"
-echo "test" | ${GPG_EXECUTABLE} --clearsign
+${GPG_EXECUTABLE} --clearsign ~/.gnupg/gpg.conf
+cat ~/.gnupg/gpg.conf.asc
 
