@@ -15,6 +15,12 @@ All images are published to hub.docker.com and are public.
 
 Status of each submodule, some modules trigger other pipelines on success
 
+## Clone with submodules
+To quickly clone this repo with all the submodules
+```
+git clone --recursive <project url>
+```
+
 ## Docker - build and run docker locally
 To build the necessary docker images required to run aem as a local docker image, from the root of `aemdesign-docker` run
 
