@@ -12,6 +12,9 @@ git:
 services:
   - 'docker'
 
+script:
+- echo "skipping all steps"
+
 ## Get the project version
 before_deploy:
   - source ./scripts/travis/get_version.sh
