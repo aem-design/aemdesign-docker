@@ -5,7 +5,7 @@
 
 echo ">>> GET CONFIG FROM GIT <<<"
 echo GET FULL GIT HISTORY
-git fetch --depth=10000 --tags
+git fetch --unshallow --tags
 export CURRENT_VERSION=$(git describe --tag --always --long | sed -e 's/\(.*\)-\(.*\)-.*/\1.\2/')
 
 echo "CURRENT_VERSION:${CURRENT_VERSION}"
