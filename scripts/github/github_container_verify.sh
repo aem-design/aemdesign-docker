@@ -26,4 +26,6 @@ if [[ "${CONTAINER_OUTPUT}" != "true" ]]; then
     echo "Expected: ${TEST_COMMAND_VERIFY}"
     echo "Got: ${CONTAINER_OUTPUT}"
     exit 1
+else
+    echo ">>> TEST PASSED <<<"
 fi
