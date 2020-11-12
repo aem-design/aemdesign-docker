@@ -21,7 +21,7 @@ echo "CONTAINER_OUTPUT=${CONTAINER_OUTPUT}" >> $GITHUB_ENV
 echo ::set-output name=CONTAINER_OUTPUT::$CONTAINER_OUTPUT
 echo "CONTAINER_OUTPUT:${CONTAINER_OUTPUT}"
 echo "TEST IF OUTPUT MATCHES EXPECTED"
-if [[ "${CONTAINER_OUTPUT}" == "false" ]]; then
+if [[ "${CONTAINER_OUTPUT}" != "true" ]]; then
     echo ">>> TEST FAILED <<<"
     echo "Expected: ${TEST_COMMAND_VERIFY}"
     echo "Got: ${CONTAINER_OUTPUT}"
