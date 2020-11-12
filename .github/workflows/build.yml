@@ -30,4 +30,3 @@ jobs:
           files: >
             ./scripts/
           body: ${{ steps.config.outputs.GIT_RELEASE_NOTES }}
-          gzip: false
