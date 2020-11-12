@@ -22,11 +22,20 @@ jobs:
           echo $RELEASE_FILES
           echo ::set-output name=RELEASE_FILES::${RELEASE_FILES}
 
-      - uses: meeDamian/github-release@2.0
+      - name: create release ${{ env.GITHUB_TAG }}
+        if: github.ref == 'refs/heads/master'
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ env.GITHUB_TAG }}
-          name: ${{ env.GITHUB_TAG }}
-          files: >
-            ./scripts/
+          tag_name: ${{ env.GITHUB_TAG }}
+          release_name: ${{ env.GITHUB_TAG }}
           body: ${{ steps.config.outputs.GIT_RELEASE_NOTES }}
+          draft: false
+          prerelease: false
+
+      - uses: AButler/upload-release-assets@v2.0
+        with:
+          files: './scripts/**/*.sh'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
