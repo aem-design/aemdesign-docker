@@ -11,23 +11,23 @@ export CURRENT_VERSION=$(git describe --tag --always --long | sed -e 's/\(.*\)-\
 echo "CURRENT_VERSION:${CURRENT_VERSION}"
 declare -a CURRENT_VERSION_ARRAY="(${CURRENT_VERSION//./ })";
 export SEMVER_MAJOR=${CURRENT_VERSION_ARRAY[0]};
-echo ::set-env name=SEMVER_MAJOR::${SEMVER_MAJOR}
+echo "SEMVER_MAJOR=${SEMVER_MAJOR}" >> $GITHUB_ENV
 echo ::set-output name=SEMVER_MAJOR::${SEMVER_MAJOR}
 export SEMVER_MINOR=${CURRENT_VERSION_ARRAY[1]};
-echo ::set-env name=SEMVER_MINOR::${SEMVER_MINOR}
+echo "SEMVER_MINOR=${SEMVER_MINOR}" >> $GITHUB_ENV
 echo ::set-output name=SEMVER_MINOR::${SEMVER_MINOR}
 export SEMVER_PATCH=${CURRENT_VERSION_ARRAY[2]};
-echo ::set-env name=SEMVER_PATCH::${SEMVER_PATCH}
+echo "SEMVER_PATCH=${SEMVER_PATCH}" >> $GITHUB_ENV
 echo ::set-output name=SEMVER_PATCH::${SEMVER_PATCH}
 export SEMVER_BUILD=${CURRENT_VERSION_ARRAY[-1]}
-echo ::set-env name=SEMVER_BUILD::${SEMVER_BUILD}
+echo "SEMVER_BUILD=${SEMVER_BUILD}" >> $GITHUB_ENV
 echo ::set-output name=SEMVER_BUILD::${SEMVER_BUILD}
 
 # if tag already has MAJOR.MINOR.PATCH add git log commit count to patch
 if [[ "${#CURRENT_VERSION_ARRAY[@]}" == "4" ]]; then
     echo "ADD PATCH TO BUILD VERSION"
     export SEMVER_BUILD=$(( ${SEMVER_PATCH} + ${SEMVER_BUILD} ))
-  echo ::set-env name=SEMVER_BUILD::${SEMVER_BUILD}
+  echo "SEMVER_BUILD=${SEMVER_BUILD}" >> $GITHUB_ENV
   echo ::set-output name=SEMVER_BUILD::${SEMVER_BUILD}
 fi
 
@@ -42,7 +42,7 @@ if ! [[ $SEMVER_BUILD =~ $REGEX_NUMBER ]] ; then
 fi
 
 export SEMVER=${SEMVER_MAJOR}.${SEMVER_MINOR}.${SEMVER_BUILD}
-echo ::set-env name=SEMVER::${SEMVER}
+echo "SEMVER=${SEMVER}" >> $GITHUB_ENV
 echo ::set-output name=SEMVER::${SEMVER}
 echo "SEMVER:${SEMVER}"
 if [[ ${SEMVER_MAJOR} == "" ]];then
@@ -50,18 +50,18 @@ if [[ ${SEMVER_MAJOR} == "" ]];then
     exit 1;
 fi
 export GITHUB_TAG=${SEMVER}
-echo ::set-env name=GITHUB_TAG::${GITHUB_TAG}
+echo "GITHUB_TAG=${GITHUB_TAG}" >> $GITHUB_ENV
 echo ::set-output name=GITHUB_TAG::${GITHUB_TAG}
 echo "GITHUB_TAG:${GITHUB_TAG}"
 export GIT_RELEASE_NOTES="$(git log $(git describe --tags --abbrev=0 --always)..HEAD --pretty=format:"%h - %s (%an)<br>")"
-echo ::set-env name=GIT_RELEASE_NOTES::${GIT_RELEASE_NOTES}
+echo "GIT_RELEASE_NOTES=${GIT_RELEASE_NOTES}" >> $GITHUB_ENV
 echo ::set-output name=GIT_RELEASE_NOTES::${GIT_RELEASE_NOTES}
 
 #set CURRENT_VERSION to semver
-echo ::set-env name=CURRENT_VERSION::${GITHUB_TAG}
+echo "CURRENT_VERSION=${GITHUB_TAG}" >> $GITHUB_ENV
 echo ::set-output name=CURRENT_VERSION::${GITHUB_TAG}
 
 #get current branch name
 export GIT_BRANCH=$(git branch --show-current)
-echo ::set-env name=GIT_BRANCH::${GIT_BRANCH}
+echo "GIT_BRANCH=${GIT_BRANCH}" >> $GITHUB_ENV
 echo ::set-output name=GIT_BRANCH::${GIT_BRANCH}
