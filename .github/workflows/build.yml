@@ -17,8 +17,7 @@ jobs:
       - name: set envirnment variables
         id: config
         run: |
-          source <(curl -sL https://github.com/aem-design/aemdesign-docker/releases/latest/download/github_get_config.sh)
-          source <(curl -sL https://github.com/aem-design/aemdesign-docker/releases/latest/download/github_get_version.sh)
+          ./scripts/download/github_get_version.sh
 
       - uses: meeDamian/github-release@2.0
         with:
