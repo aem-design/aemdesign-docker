@@ -27,6 +27,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ env.GITHUB_TAG }}
           name: ${{ env.GITHUB_TAG }}
-          files: ${{ steps.config.outputs.RELEASE_FILES }}
-          body: ./scripts/
+          files: >
+            ./scripts/
+          body: ${{ steps.config.outputs.GIT_RELEASE_NOTES }}
           gzip: false
