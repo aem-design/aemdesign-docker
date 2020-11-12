@@ -18,7 +18,7 @@ jobs:
         id: config
         run: |
           ./scripts/github/github_get_version.sh
-          RELEASE_FILES=( $( ls . ) )
+          RELEASE_FILES=( $( ls ./scripts/**/*.sh ) )
           echo $RELEASE_FILES
           echo ::set-output name=RELEASE_FILES::${RELEASE_FILES}
 
