@@ -18,10 +18,14 @@ jobs:
         id: config
         run: |
           ./scripts/github/github_get_version.sh
+          RELEASE_FILES=( $( ls . ) )
+          echo $RELEASE_FILES
+          echo ::set-output name=RELEASE_FILES::${RELEASE_FILES}
 
       - uses: meeDamian/github-release@2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ env.GITHUB_TAG }}
           name: ${{ env.GITHUB_TAG }}
+          files: ${{ steps.config.outputs.RELEASE_FILES }}
           body: ${{ steps.config.outputs.GIT_RELEASE_NOTES }}
