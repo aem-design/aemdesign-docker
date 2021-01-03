@@ -118,6 +118,10 @@
                         <!--<match>__null__</match>-->
                         <!--<tags>false</tags>-->
                     </gitDescribe>
+                    <includeOnlyProperties>
+                        <includeOnlyProperty>^git.closest.tag.name$</includeOnlyProperty>
+                        <includeOnlyProperty>^git.closest.tag.commit.count$</includeOnlyProperty>
+                    </includeOnlyProperties>
                 </configuration>
             </plugin>
 
