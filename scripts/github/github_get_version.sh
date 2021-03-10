@@ -8,6 +8,11 @@ echo GET FULL GIT HISTORY
 git fetch --unshallow --tags 2>&1 || true
 export CURRENT_VERSION=$(git describe --tag --always --long | sed -e 's/\(.*\)-\(.*\)-.*/\1.\2/')
 
+#get current branch name
+export GIT_BRANCH=$(git branch --show-current)
+echo "GIT_BRANCH=${GIT_BRANCH}" >> $GITHUB_ENV
+echo ::set-output name=GIT_BRANCH::${GIT_BRANCH}
+
 echo "CURRENT_VERSION:${CURRENT_VERSION}"
 declare -a CURRENT_VERSION_ARRAY="(${CURRENT_VERSION//./ })";
 export SEMVER_MAJOR=${CURRENT_VERSION_ARRAY[0]};
@@ -60,8 +65,3 @@ echo ::set-output name=GIT_RELEASE_NOTES::${GIT_RELEASE_NOTES}
 #set CURRENT_VERSION to semver
 echo "CURRENT_VERSION=${GITHUB_TAG}" >> $GITHUB_ENV
 echo ::set-output name=CURRENT_VERSION::${GITHUB_TAG}
-
-#get current branch name
-export GIT_BRANCH=$(git branch --show-current)
-echo "GIT_BRANCH=${GIT_BRANCH}" >> $GITHUB_ENV
-echo ::set-output name=GIT_BRANCH::${GIT_BRANCH}
