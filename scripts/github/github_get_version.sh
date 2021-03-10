@@ -11,10 +11,10 @@ export CURRENT_VERSION=$(git describe --tag --always --long | sed -e 's/\(.*\)-\
 #get current branch name
 echo "GITHUB_EVENT_NAME:${GITHUB_EVENT_NAME}"
 echo "GITHUB_REF:${GITHUB_REF}"
-if [[ "$GITHUB_EVENT_NAME" != "pull_request" ]]: then
+if [[ "$GITHUB_EVENT_NAME" != "pull_request" ]]; then
   echo "GIT_BRANCH=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
 fi
-if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]: then
+if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
   echo "GIT_BRANCH=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
 fi
 echo ::set-output name=GIT_BRANCH::${GIT_BRANCH}
