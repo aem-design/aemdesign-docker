@@ -9,10 +9,11 @@ git fetch --unshallow --tags 2>&1 || true
 export CURRENT_VERSION=$(git describe --tag --always --long | sed -e 's/\(.*\)-\(.*\)-.*/\1.\2/')
 
 #get current branch name
-export GIT_BRANCH=$(git branch --show-current)
-echo "GIT_BRANCH=${GIT_BRANCH}" >> $GITHUB_ENV
+echo "GIT_BRANCH=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
+echo "GIT_BRANCH=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
 echo ::set-output name=GIT_BRANCH::${GIT_BRANCH}
 echo "GIT_BRANCH:${GIT_BRANCH}"
+
 
 echo "CURRENT_VERSION:${CURRENT_VERSION}"
 declare -a CURRENT_VERSION_ARRAY="(${CURRENT_VERSION//./ })";
