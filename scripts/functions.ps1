@@ -282,7 +282,12 @@ Function Main
 
   # ensure default log path
   if ( [string]::IsNullOrEmpty(${LOG_PATH}) ) {
-   $script:LOG_PATH = "${PWD}\logs"
+    $script:LOG_PATH = (Resolve-Path -Path "logs" -Relative)
+  }
+
+  # ensure log path exist
+  if(!(Test-Path -Path ${LOG_PATH} )){
+    New-Item -ItemType directory -Path ${LOG_PATH}
   }
 
   $script:LOG_PATH = (createDir $LOG_PATH)
