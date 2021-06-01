@@ -287,7 +287,7 @@ Function Main
 
   # ensure log path exist
   if(!(Test-Path -Path ${LOG_PATH} )){
-    New-Item -ItemType directory -Path ${LOG_PATH}
+    New-Item -ItemType directory -Path ${LOG_PATH} | Out-Null
   }
 
   $script:LOG_PATH = (createDir $LOG_PATH)
