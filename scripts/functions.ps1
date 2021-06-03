@@ -290,9 +290,20 @@ Function Main
     New-Item -ItemType directory -Path ${LOG_PATH} | Out-Null
   }
 
-  $script:LOG_PATH = (createDir $LOG_PATH)
-  $script:DOCKER_LOGS_FOLDER = (createDir $DOCKER_LOGS_FOLDER)
-  $script:DRIVER_FOLDER = (createDir $DRIVER_FOLDER)
+  # ensure log path exist
+  if(!(Test-Path -Path ${DOCKER_LOGS_FOLDER} )){
+    New-Item -ItemType directory -Path ${DOCKER_LOGS_FOLDER} | Out-Null
+  }
+
+  # ensure log path exist
+  if(!(Test-Path -Path ${DRIVER_FOLDER} )){
+    New-Item -ItemType directory -Path ${DRIVER_FOLDER} | Out-Null
+  }
+
+
+  $script:LOG_PATH = $LOG_PATH
+  $script:DOCKER_LOGS_FOLDER = $DOCKER_LOGS_FOLDER
+  $script:DRIVER_FOLDER = $DRIVER_FOLDER
 
   Write-Output "${LOG_PATH}"
 
