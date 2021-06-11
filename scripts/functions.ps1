@@ -280,22 +280,34 @@ Function Main
   #  printSubSectionStart "printSubSectionStart"
   #  printSubSectionEnd "printSubSectionEnd"
 
-  # ensure default log path
-  if ( [string]::IsNullOrEmpty(${LOG_PATH}) ) {
-    $script:LOG_PATH = (Resolve-Path -Path "logs" -Relative)
-  }
-
   # ensure log path exist
+  if (-not([string]::IsNullOrEmpty(${LOG_PATH}))) {
+    $script:LOG_PATH = (Resolve-Path -Path "logs" -Relative)
+  } else {
+    $script:LOG_PATH = (Resolve-Path -Path ${LOG_PATH} -Relative)
+  }
   if(!(Test-Path -Path ${LOG_PATH} )){
     New-Item -ItemType directory -Path ${LOG_PATH} | Out-Null
   }
 
   # ensure log path exist
+  if (-not([string]::IsNullOrEmpty(${DOCKER_LOGS_FOLDER}))) {
+    $script:DOCKER_LOGS_FOLDER=${LOG_PATH}
+  } else {
+    $script:LOG_PATH = (Resolve-Path -Path ${DOCKER_LOGS_FOLDER} -Relative)
+  }
   if(!(Test-Path -Path ${DOCKER_LOGS_FOLDER} )){
     New-Item -ItemType directory -Path ${DOCKER_LOGS_FOLDER} | Out-Null
+  } else {
+    $script:LOG_PATH = (Resolve-Path -Path ${DOCKER_LOGS_FOLDER} -Relative)
   }
 
   # ensure log path exist
+  if (-not([string]::IsNullOrEmpty(${DRIVER_FOLDER}))) {
+    $script:DRIVER_FOLDER=${LOG_PATH}
+  } else {
+    $script:LOG_PATH = (Resolve-Path -Path ${DRIVER_FOLDER} -Relative)
+  }
   if(!(Test-Path -Path ${DRIVER_FOLDER} )){
     New-Item -ItemType directory -Path ${DRIVER_FOLDER} | Out-Null
   }
