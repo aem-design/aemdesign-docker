@@ -281,7 +281,7 @@ Function Main
   #  printSubSectionEnd "printSubSectionEnd"
 
   # ensure log path exist
-  if (-not([string]::IsNullOrEmpty(${LOG_PATH}))) {
+  if ([string]::IsNullOrEmpty(${LOG_PATH})) {
     $script:LOG_PATH = (Resolve-Path -Path "logs" -Relative)
   } else {
     $script:LOG_PATH = (Resolve-Path -Path ${LOG_PATH} -Relative)
@@ -291,7 +291,7 @@ Function Main
   }
 
   # ensure log path exist
-  if (-not([string]::IsNullOrEmpty(${DOCKER_LOGS_FOLDER}))) {
+  if ([string]::IsNullOrEmpty(${DOCKER_LOGS_FOLDER})) {
     $script:DOCKER_LOGS_FOLDER=${LOG_PATH}
   } else {
     $script:LOG_PATH = (Resolve-Path -Path ${DOCKER_LOGS_FOLDER} -Relative)
@@ -303,7 +303,7 @@ Function Main
   }
 
   # ensure log path exist
-  if (-not([string]::IsNullOrEmpty(${DRIVER_FOLDER}))) {
+  if ([string]::IsNullOrEmpty(${DRIVER_FOLDER})) {
     $script:DRIVER_FOLDER=${LOG_PATH}
   } else {
     $script:LOG_PATH = (Resolve-Path -Path ${DRIVER_FOLDER} -Relative)
