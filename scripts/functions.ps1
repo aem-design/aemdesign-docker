@@ -296,7 +296,7 @@ Function Main
   if(!(Test-Path -Path ${DOCKER_LOGS_FOLDER} )){
     New-Item -ItemType directory -Path ${DOCKER_LOGS_FOLDER} | Out-Null
   }
-  $script:LOG_PATH = (Resolve-Path -Path ${DOCKER_LOGS_FOLDER} -Relative)
+  $script:DOCKER_LOGS_FOLDER = (Resolve-Path -Path ${DOCKER_LOGS_FOLDER} -Relative)
 
   # ensure log path exist
   if ([string]::IsNullOrEmpty(${DRIVER_FOLDER})) {
@@ -305,21 +305,21 @@ Function Main
   if(!(Test-Path -Path ${DRIVER_FOLDER} )){
     New-Item -ItemType directory -Path ${DRIVER_FOLDER} | Out-Null
   }
-  $script:LOG_PATH = (Resolve-Path -Path ${DRIVER_FOLDER} -Relative)
+  $script:DRIVER_FOLDER = (Resolve-Path -Path ${DRIVER_FOLDER} -Relative)
 
 
   $script:LOG_PATH = $LOG_PATH
   $script:DOCKER_LOGS_FOLDER = $DOCKER_LOGS_FOLDER
   $script:DRIVER_FOLDER = $DRIVER_FOLDER
 
-  Write-Output "${LOG_PATH}"
+  Write-Output "LOG_PATH: ${LOG_PATH}"
 
   # set logfile name
   $script:LOG_FILENAME_DATE = "$(DateStamp)"
   $script:LOG_FILENAME = "${LOG_PEFIX}-${DOCKER_NETWORK_NAME}-${LOG_FILENAME_DATE}${LOG_SUFFIX}"
   $script:LOG_FILE = "${LOG_PATH}\${LOG_FILENAME}"
 
-  Write-Output "${LOG_FILE}"
+  Write-Output "LOG_FILE: ${LOG_FILE}"
 
   $script:LOCAL_IP = (Get-LocalIP)
 
