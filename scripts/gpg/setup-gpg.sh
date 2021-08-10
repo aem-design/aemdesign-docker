@@ -74,8 +74,9 @@ echo ">>> RESTART AGENT <<<"
 ${GPG_AGENT_CONNECT_EXECUTABLE} reloadagent /bye
 echo ">>> GET AGENT STATUS <<<"
 ${GPG_AGENT_EXECUTABLE}
-echo ">>> IMPORT KEYS <<<"
+echo ">>> IMPORT SECRET KEYS <<<"
 echo ${GPG_SECRET_KEYS} | base64 --decode | ${GPG_EXECUTABLE} --batch --import
+echo ">>> IMPORT OWNER TRUST <<<"
 echo ${GPG_OWNERTRUST} | base64 --decode | ${GPG_EXECUTABLE} --import-ownertrust
 echo ">>> LIST KEYS <<<"
 ${GPG_EXECUTABLE} --list-secret-keys --keyid-format LONG
