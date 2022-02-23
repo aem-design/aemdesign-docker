@@ -46,3 +46,9 @@
 [submodule "docker-nginx"]
 	path = docker-nginx
 	url = git@github.com:aem-design/docker-nginx.git
+[submodule "docker-tini"]
+	path = docker-tini
+	url = git@github.com:aem-design/docker-tini.git
+[submodule "docker-java-buildpack"]
+	path = docker-java-buildpack
+	url = git@github.com:aem-design/docker-java-buildpack.git
