@@ -20,7 +20,13 @@ function doDownloadGDrive() {
   fi
 
   curl -c ./tmp/cookie -s -L "https://drive.google.com/uc?export=download&id=${FILEID}" > /dev/null
-  curl -Lb ./tmp/cookie "https://drive.google.com/uc?export=download&confirm=`awk '/download/ {print $NF}' ./tmp/cookie`&id=${FILEID}" -o ${FILENAME}
+  COOKIE_CONFIRM=$(awk '/download/ {print $NF}' ./tmp/cookie)
+
+  if [[ "" == "${COOKIE_CONFIRM}" ]]; then
+    COOKIE_CONFIRM="t"
+  fi
+
+  curl -Lb ./tmp/cookie "https://drive.google.com/uc?export=download&confirm=${COOKIE_CONFIRM}&id=${FILEID}" -o ${FILENAME}
 
 }
 
