@@ -48,7 +48,7 @@ Function Get-LocalIP
     [string]$IPCONFIG_COMMAND_OUTPUT = "${LOG_PATH}\ipconfig.log"
   )
 
-  if ( $PLATFORM -eq "Unix" ) {
+  if ( $PSVersionTable.Platform -eq "Unix" ) {
     $IP_ADDRESS="ipconfig getifaddr en0"
   } else {
   
