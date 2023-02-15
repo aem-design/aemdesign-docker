@@ -20,7 +20,10 @@ jobs:
           ./scripts/github/github_get_version.sh
           RELEASE_FILES=( $( ls ./scripts/**/*.sh ) )
           echo $RELEASE_FILES
-          echo "RELEASE_FILES=$(echo $RELEASE_FILES | tr '\n' ' ')" >> $GITHUB_OUTPUT
+          RELEASE_FILES_HTML=$(echo $RELEASE_FILES | tr '\n' ' ')
+          echo -e "text<<EOF\n$RELEASE_FILES_HTML\nEOF" >> $GITHUB_OUTPUT
+#          echo "text=$message" >> $GITHUB_OUTPUT
+#          echo "RELEASE_FILES=$(echo $RELEASE_FILES | tr '\n' ' ')" >> $GITHUB_OUTPUT
 
       - name: create release ${{ env.GITHUB_TAG }}
         if: github.ref == 'refs/heads/master'
