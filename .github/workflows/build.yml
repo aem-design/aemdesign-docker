@@ -13,14 +13,14 @@ jobs:
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: set envirnment variables
         id: config
         run: |
           ./scripts/github/github_get_version.sh
           RELEASE_FILES=( $( ls ./scripts/**/*.sh ) )
           echo $RELEASE_FILES
-          echo ::set-output name=RELEASE_FILES::${RELEASE_FILES}
+          echo "RELEASE_FILES=${RELEASE_FILES}" >> $GITHUB_OUTPUT
 
       - name: create release ${{ env.GITHUB_TAG }}
         if: github.ref == 'refs/heads/master'
