@@ -18,7 +18,8 @@ echo "TEST_COMMAND:${TEST_COMMAND}"
 echo "TEST:docker run --env TEST_COMMAND ${IMAGE}:${IMAGE_VERSION} bash -c 'eval \${TEST_COMMAND} 2>&1 | grep -q -e ${TEST_COMMAND_VERIFY} && echo true || echo false'"
 export CONTAINER_OUTPUT=$(docker run --env TEST_COMMAND ${IMAGE}:${IMAGE_VERSION} bash -c "eval \${TEST_COMMAND} 2>&1 | grep -q -e \"${TEST_COMMAND_VERIFY}\" && echo true || echo false")
 echo "CONTAINER_OUTPUT=${CONTAINER_OUTPUT}" >> $GITHUB_ENV
-echo ::set-output name=CONTAINER_OUTPUT::$CONTAINER_OUTPUT
+echo "CONTAINER_OUTPUT=${CONTAINER_OUTPUT}" >> $GITHUB_OUTPUT
+
 echo "CONTAINER_OUTPUT:${CONTAINER_OUTPUT}"
 echo "TEST IF OUTPUT MATCHES EXPECTED"
 if [[ "${CONTAINER_OUTPUT}" != "true" ]]; then
