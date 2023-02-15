@@ -77,7 +77,7 @@ export GIT_RELEASE_NOTES="$(git log $(git describe --tags --abbrev=0 --always)..
 #echo "GIT_RELEASE_NOTES=${GIT_RELEASE_NOTES}" >> $GITHUB_OUTPUT
 
 GIT_RELEASE_NOTES_HTML=$(echo $GIT_RELEASE_NOTES | tr '\n' ' ')
-echo -e "text<<EOF\n${GIT_RELEASE_NOTES_HTML}\nEOF" >> $GITHUB_OUTPUT
+echo -e "GIT_RELEASE_NOTES<<EOF\n${GIT_RELEASE_NOTES_HTML}\nEOF" >> $GITHUB_OUTPUT
 
 #set CURRENT_VERSION to semver
 echo "CURRENT_VERSION=${GITHUB_TAG}" >> $GITHUB_ENV
