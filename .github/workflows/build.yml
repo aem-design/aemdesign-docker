@@ -1,6 +1,11 @@
 name: build
 
 on: [push]
+# Allow one concurrent deployment
+concurrency:
+  group:  ci-${{ github.ref }}
+  cancel-in-progress: true
+
 
 jobs:
   build:
