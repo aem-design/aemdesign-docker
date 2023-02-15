@@ -20,7 +20,7 @@ jobs:
           ./scripts/github/github_get_version.sh
           RELEASE_FILES=( $( ls ./scripts/**/*.sh ) )
           echo $RELEASE_FILES
-          echo "RELEASE_FILES=${RELEASE_FILES}" >> $GITHUB_OUTPUT
+          echo RELEASE_FILES="${RELEASE_FILES}" >> $GITHUB_OUTPUT
 
       - name: create release ${{ env.GITHUB_TAG }}
         if: github.ref == 'refs/heads/master'
