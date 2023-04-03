@@ -70,3 +70,6 @@
 	path = docker-java-buildpack
 	url = git@github.com:aem-design/docker-java-buildpack.git
 	branch = main
+[submodule "docker-dispatcher-sdk"]
+	path = docker-dispatcher-sdk
+	url = https://github.com/aem-design/docker-dispatcher-sdk.git
