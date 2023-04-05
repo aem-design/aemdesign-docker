@@ -19,6 +19,10 @@ export TEST_COMMAND_VERIFY=$(grep test.command.verify= Dockerfile | sed -e 's/.*
 echo "TEST_COMMAND_VERIFY=${TEST_COMMAND_VERIFY}" >> $GITHUB_ENV
 echo "TEST_COMMAND_VERIFY=${TEST_COMMAND_VERIFY}" >> $GITHUB_OUTPUT
 
+export TEST_COMMAND_DIRECT=$(grep test.command.direct= Dockerfile | sed -e 's/.*test.command.direct="\(.*\)".*/\1/')
+echo "TEST_COMMAND_DIRECT=${TEST_COMMAND_DIRECT}" >> $GITHUB_ENV
+echo "TEST_COMMAND_DIRECT=${TEST_COMMAND_DIRECT}" >> $GITHUB_OUTPUT
+
 export IMAGE_VERSION=$(grep version= Dockerfile | sed -e 's/.*version="\(.*\)".*/\1/')
 echo "IMAGE_VERSION=${IMAGE_VERSION}" >> $GITHUB_ENV
 echo "IMAGE_VERSION=${IMAGE_VERSION}" >> $GITHUB_OUTPUT
