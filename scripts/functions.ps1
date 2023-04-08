@@ -540,10 +540,10 @@ function doWaitForBundlesToInstall {
 
     printSectionInLine "Wait: "
     printSectionInLine "." ""
-    while [[ "true" == "$($CURL -L -u "$LOGIN" --header "Referer:${ADDRESS}" --silent -N --connect-timeout 5 --max-time 5 "${ADDRESS}${INSTALL_CHECK}" | $GREP -q "\"state\":\"Installed\"" && echo true || echo false)" ]]; do
+    while ( $($CURL -L -u "$LOGIN" --header "Referer:${ADDRESS}" --silent -N --connect-timeout 5 --max-time 5 "${ADDRESS}${INSTALL_CHECK}" | $GREP -q "\"state\":\"Installed\"" && echo true || echo false) -eq "true" ) {
         printSectionInLine "." ""
         $SLEEP 1
-    done
+    }
     printSectionInLineReset
 
     printSectionLine "Bundles are installed"
