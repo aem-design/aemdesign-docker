@@ -7,6 +7,13 @@ $script:SKIP_CONFIG = (&{If($SKIP_CONFIG -eq $null) {$false} else {$SKIP_CONFIG}
 $script:LOG_PATH = (&{If($LOG_PATH -eq $null) {"${PWD}\logs"} else {$LOG_PATH}})
 $script:TEST_SELENIUM_URL = (&{If($TEST_SELENIUM_URL -eq $null) {""} else {$TEST_SELENIUM_URL}})
 
+$script:CURL=$(/usr/bin/which curl)
+$script:CAT=$(/usr/bin/which cat)
+$script:GREP=$(/usr/bin/which grep)
+$script:HEAD=$(/usr/bin/which head)
+$script:TAIL=$(/usr/bin/which tail)
+$script:SED=$(/usr/bin/which sed)
+
 Function Get-DateStamp
 {
   [Cmdletbinding()]
@@ -375,7 +382,15 @@ Function Main
       printSectionLine " - SELENIUMHUB_PORT: $SELENIUMHUB_PORT"
       printSectionLine " - SELENIUMHUB_SCHEME: $SELENIUMHUB_SCHEME"
       printSectionLine " - SELENIUMHUB_SERVICE: $SELENIUMHUB_SERVICE"
-
+            
+      printSectionLine "Utils:     (Add this to path if blank C:\Program Files\Git\usr\bin)"
+      printSectionLine " - CURL: $CURL"
+      printSectionLine " - CAT: $CAT"
+      printSectionLine " - GREP: $GREP"
+      printSectionLine " - HEAD: $HEAD"
+      printSectionLine " - TAIL: $TAIL"
+      printSectionLine " - SED: $SED"
+      
       $script:SKIP_PRINT_CONFIG = $false
     }
 
@@ -510,6 +525,46 @@ function doSlingPost {
 
     $Response = Invoke-WebRequest -Method Post -Headers $HEADERS -TimeoutSec $Timeout -Uri "$Url" -Form $Body -ContentType "application/x-www-form-urlencoded"
 
+}
+
+#doWaitForBundlesToInstall(address,login)
+function doWaitForBundlesToInstall {
+    local LOGIN=${1?Need login}
+    local ADDRESS=${2?Need address}
+    local SERVICE_CHECK="/system/console/bundles"
+    local INSTALL_CHECK="/system/console/bundles.json"
+    local PACKAGE_MANAGER_CHECK="/crx/packmgr/service.jsp"
+
+    printSectionLine "Waiting for bundles to be installed"
+    printSectionLine "$CURL -u "${LOGIN}" --header Referer:${ADDRESS} --silent --connect-timeout 5 --max-time 5 ${ADDRESS}${INSTALL_CHECK} | $GREP -q \"state\":\"Installed\" && echo true || echo false"
+
+    printSectionInLine "Wait: "
+    printSectionInLine "." ""
+    while [[ "true" == "$($CURL -L -u "$LOGIN" --header "Referer:${ADDRESS}" --silent -N --connect-timeout 5 --max-time 5 "${ADDRESS}${INSTALL_CHECK}" | $GREP -q "\"state\":\"Installed\"" && echo true || echo false)" ]]; do
+        printSectionInLine "." ""
+        $SLEEP 1
+    done
+    printSectionInLineReset
+
+    printSectionLine "Bundles are installed"
+
+}
+
+function doGetCheck() {
+    local LOGIN=${1?Need login}
+    local ADDRESS=${2?Need address}
+    local PATH=${3?Need path}
+
+    local RESULT=$($CURL -L -u "${LOGIN}" --header Referer:${ADDRESS} -H User-Agent:curl -X GET --connect-timeout 1 --max-time 1 -w "%{http_code}" -o /dev/null --silent -N "${ADDRESS}${PATH}" | $GREP -q "200" && echo true || echo false)
+    echo ${RESULT}
+}
+
+function doCheckPathExist() {
+    local PATH=${1?Need path}
+    local LOGIN=${1?Need login}
+    local ADDRESS=${2?Need address}
+
+    doGetCheck "${LOGIN}" "${ADDRESS}" "${PATH}"
 }
 
 
