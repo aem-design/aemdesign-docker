@@ -384,6 +384,7 @@ Function Main
       printSectionLine " - SELENIUMHUB_SERVICE: $SELENIUMHUB_SERVICE"
             
       printSectionLine "Utils:     (Add this to path if blank C:\Program Files\Git\usr\bin)"
+      printSectionLine " https://aem.design/blog/2022/05/22/setup-your-windows-devbox-like-a-pro"
       printSectionLine " - CURL: $CURL"
       printSectionLine " - CAT: $CAT"
       printSectionLine " - GREP: $GREP"
