@@ -1,74 +1,74 @@
 [submodule "docker-aem"]
 	path = docker-aem
-	url = git@github.com:aem-design/docker-aem.git
+	url = https://github.com/aem-design/docker-aem.git
 	branch = master
 [submodule "docker-aem-base"]
 	path = docker-aem-base
-	url = git@github.com:aem-design/docker-aem-base.git
+	url = https://github.com/aem-design/docker-aem-base.git
 	branch = master
 [submodule "docker-ansible-playbook"]
 	path = docker-ansible-playbook
-	url = git@github.com:aem-design/docker-ansible-playbook.git
+	url = https://github.com/aem-design/docker-ansible-playbook.git
 	branch = master
 [submodule "docker-centos-java-buildpack"]
 	path = docker-centos-java-buildpack
-	url = git@github.com:aem-design/docker-centos-java-buildpack.git
+	url = https://github.com/aem-design/docker-centos-java-buildpack.git
 	branch = master
 [submodule "docker-centos-tini"]
 	path = docker-centos-tini
-	url = git@github.com:aem-design/docker-centos-tini.git
+	url = https://github.com/aem-design/docker-centos-tini.git
 	branch = master
 [submodule "docker-dispatcher"]
 	path = docker-dispatcher
-	url = git@github.com:aem-design/docker-dispatcher.git
+	url = https://github.com/aem-design/docker-dispatcher.git
 	branch = master
 [submodule "docker-java-ffmpeg"]
 	path = docker-java-ffmpeg
-	url = git@github.com:aem-design/docker-java-ffmpeg.git
+	url = https://github.com/aem-design/docker-java-ffmpeg.git
 	branch = master
 [submodule "docker-jenkins"]
 	path = docker-jenkins
-	url = git@github.com:aem-design/docker-jenkins.git
+	url = https://github.com/aem-design/docker-jenkins.git
 	branch = master
 [submodule "docker-jenkins-base"]
 	path = docker-jenkins-base
-	url = git@github.com:aem-design/docker-jenkins-base.git
+	url = https://github.com/aem-design/docker-jenkins-base.git
 	branch = master
 [submodule "docker-nexus"]
 	path = docker-nexus
-	url = git@github.com:aem-design/docker-nexus.git
+	url = https://github.com/aem-design/docker-nexus.git
 	branch = master
 [submodule "docker-oracle-jdk"]
 	path = docker-oracle-jdk
-	url = git@github.com:aem-design/docker-oracle-jdk.git
+	url = https://github.com/aem-design/docker-oracle-jdk.git
 	branch = master
 [submodule "docker-dockerhub-description"]
 	path = docker-dockerhub-description
-	url = git@github.com:aem-design/docker-dockerhub-description.git
+	url = https://github.com/aem-design/docker-dockerhub-description.git
 	branch = master
 [submodule "docker-toughday"]
 	path = docker-toughday
-	url = git@github.com:aem-design/docker-toughday.git
+	url = https://github.com/aem-design/docker-toughday.git
 	branch = master
 [submodule "docker-travis-build-trigger"]
 	path = docker-travis-build-trigger
-	url = git@github.com:aem-design/docker-travis-build-trigger.git
+	url = https://github.com/aem-design/docker-travis-build-trigger.git
 	branch = master
 [submodule "docker-openjdk"]
 	path = docker-openjdk
-	url = git@github.com:aem-design/docker-openjdk.git
+	url = https://github.com/aem-design/docker-openjdk.git
 	branch = master
 [submodule "docker-nginx"]
 	path = docker-nginx
-	url = git@github.com:aem-design/docker-nginx.git
+	url = https://github.com/aem-design/docker-nginx.git
 	branch = master
 [submodule "docker-tini"]
 	path = docker-tini
-	url = git@github.com:aem-design/docker-tini.git
+	url = https://github.com/aem-design/docker-tini.git
 	branch = master
 [submodule "docker-java-buildpack"]
 	path = docker-java-buildpack
-	url = git@github.com:aem-design/docker-java-buildpack.git
+	url = https://github.com/aem-design/docker-java-buildpack.git
 	branch = main
 [submodule "docker-dispatcher-sdk"]
 	path = docker-dispatcher-sdk
