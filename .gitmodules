@@ -73,6 +73,8 @@
 [submodule "docker-dispatcher-sdk"]
 	path = docker-dispatcher-sdk
 	url = https://github.com/aem-design/docker-dispatcher-sdk.git
+  branch = main
 [submodule "docker-mkcert"]
 	path = docker-mkcert
 	url = https://github.com/aem-design/docker-mkcert.git
+  branch = main
