@@ -65,7 +65,7 @@
 [submodule "docker-tini"]
 	path = docker-tini
 	url = https://github.com/aem-design/docker-tini.git
-	branch = master
+	branch = main
 [submodule "docker-java-buildpack"]
 	path = docker-java-buildpack
 	url = https://github.com/aem-design/docker-java-buildpack.git
