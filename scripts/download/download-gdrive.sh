@@ -19,14 +19,20 @@ function doDownloadGDrive() {
       mkdir tmp
   fi
 
-  curl -c ./tmp/cookie -s -L "https://drive.google.com/uc?export=download&id=${FILEID}" > /dev/null
+  local URL_COOKIE="https://drive.google.com/uc?export=download&id=${FILEID}"
+#  echo "COOKIE URL ${URL_COOKIE}"
+  curl -c ./tmp/cookie -s -L "${URL_COOKIE}" > /dev/null
   COOKIE_CONFIRM=$(awk '/download/ {print $NF}' ./tmp/cookie)
+  cat ./tmp/cookie
+#  echo "COOKIE_CONFIRM: ${COOKIE_CONFIRM}"
 
   if [[ "" == "${COOKIE_CONFIRM}" ]]; then
     COOKIE_CONFIRM="t"
   fi
 
-  curl -Lb ./tmp/cookie "https://drive.google.com/uc?export=download&confirm=${COOKIE_CONFIRM}&id=${FILEID}" -o ${FILENAME}
+  local URL_DOWNLOAD="https://drive.usercontent.google.com/download?export=download&&authuser=0&confirm=${COOKIE_CONFIRM}&id=${FILEID}"
+#  echo "DOWNLOADING ${URL_DOWNLOAD} to ${FILENAME}"
+  curl -Lb ./tmp/cookie "${URL_DOWNLOAD}" -o ${FILENAME}
 
 }
 
