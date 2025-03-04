@@ -568,6 +568,139 @@ function doSlingPost {
 #     doGetCheck "${LOGIN}" "${ADDRESS}" "${PATH}"
 # }
 
+# add helper to load .env files.
+function Read-Dotenv {
+    param (
+        [string]$EnvFile = '.env',  # Path to the .env file
+        [bool]$Strict = $false      # Whether to throw an error if the file does not exist
+    )
+
+    # Check if the .env file exists
+    if (-not (Test-Path $EnvFile)) {
+        if ($Strict) {
+            Throw "The Dotenv file does not exist at the path: $EnvFile"
+        }
+        return
+    }
+
+    # Hashtable to store environment variables
+    $envVars = @{}
+
+    # Function to resolve variable references within values
+    function Resolve-Value {
+        param (
+            [string]$value,        # The value to resolve
+            [hashtable]$envVars    # Hashtable containing the environment variables
+        )
+
+        $prevValue = $null
+        while ($prevValue -ne $value) {
+            $prevValue = $value
+
+            # Resolve ${VAR} patterns
+            $value = [regex]::Replace($value, '\$\{(\w+)\}', {
+                param ($match)
+                if ($envVars.ContainsKey($match.Groups[1].Value)) {
+                    $envVars[$match.Groups[1].Value]
+                } else {
+                    $match.Value
+                }
+            })
+
+            # Resolve $VAR patterns
+            $value = [regex]::Replace($value, '\$(\w+)', {
+                param ($match)
+                if ($envVars.ContainsKey($match.Groups[1].Value)) {
+                    $envVars[$match.Groups[1].Value]
+                } else {
+                    $match.Value
+                }
+            })
+        }
+
+        return $value
+    }
+
+
+    # Read and process the .env file line by line
+    $content = Get-Content $EnvFile -Raw
+    $lines = $content -split "`n"
+
+    foreach ($line in $lines) {
+        $line = $line.Trim()
+
+        # Ignore empty lines and lines starting with '#'
+        if ($line.StartsWith('#') -or [string]::IsNullOrWhiteSpace($line)) {
+            continue
+        }
+
+        # Ignore 'export ' prefix
+        if ($line.StartsWith('export ')) {
+            $line = $line.Substring(7).Trim()
+        }
+
+        # Split by the first '=' only to separate name and value
+        $splitIndex = $line.IndexOf('=')
+        if ($splitIndex -eq -1) {
+            continue
+        }
+
+        $name = $line.Substring(0, $splitIndex).Trim()
+        $value = $line.Substring($splitIndex + 1).Trim()
+
+        # Validate the variable name
+        if ([string]::IsNullOrWhiteSpace($name) -or $name.Contains(' ')) {
+            if ($Strict) {
+                Throw "Invalid environment variable name: '$name' in line: '$line'"
+            }
+            continue
+        }
+
+        # remove trailing comments
+        $value = $value -replace '\s+#.*$', ''
+
+        # Remove surrounding quotes from the value and handle escape characters
+        $interpolate = $true
+        if ($value.StartsWith('"') -and $value.EndsWith('"')) {
+            $value = $value.Substring(1, $value.Length - 2) -replace '\"', '"'
+        } elseif ($value.StartsWith("'") -and $value.EndsWith("'")) {
+            $value = $value.Substring(1, $value.Length - 2) -replace "\\'", "'"
+            $interpolate = $false
+        }
+
+        # Store the raw value in the hashtable
+        $envVars[$name] = $value
+
+        # Resolve and set the environment variable
+        $resolvedValue = if ($interpolate) { Resolve-Value -value $value -envVars $envVars } else { $value }
+
+        Write-Host "Name: $name, Value: $value, Resolved: $resolvedValue"
+
+        switch ($resolvedValue.ToLower()) {
+            'true' {
+                Set-Variable -Name $name -Value $true -Scope Global
+                [System.Environment]::SetEnvironmentVariable($name, $true, "Process")
+            }
+            'false' {
+                Set-Variable -Name $name -Value $false -Scope Global
+                [System.Environment]::SetEnvironmentVariable($name, $false, "Process")
+            }
+            'null' {
+                Set-Variable -Name $name -Value $null -Scope Global
+                [System.Environment]::SetEnvironmentVariable($name, $null, "Process")
+            }
+            '' {
+                Set-Variable -Name $name -Value $null -Scope Global
+                [System.Environment]::SetEnvironmentVariable($name, $null, "Process")
+            }
+            default {
+                Set-Variable -Name $name -Value $resolvedValue -Scope Global
+                [System.Environment]::SetEnvironmentVariable($name, $resolvedValue, "Process")
+            }
+        }
+    }
+}
+
 
 #run main
 Main
